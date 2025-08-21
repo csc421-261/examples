@@ -9,14 +9,20 @@
 # usage: make connect
 #    or make M=1.2.3.4 connect
 
-M= 3.81.166.181
 FF= /Applications/Firefox.app/Contents/MacOS/firefox 
 K= id_ed25519_aws_csc421
 
+M= 3.81.166.181
+
 all:
 	@echo various targets:
+	@echo "    make connect"
 	@echo "    make connect M=$M"
 	@echo "    make ssh-keygen"
+	@echo ""
+	@echo "set the macro M to the public IP of the instance"
+	@echo "or specify as make connect M=1.2.3.4"
+	@echo "cut and paste $K.pub as a key pair in AWS"
 
 connect:
 	# update macro M or supply M= when used
@@ -27,8 +33,5 @@ firefox:
 	${FF} http://$M
 
 ssh-keygen:
-	@echo " "
-	@echo "*** no password needed"
-	@echo "*** cut and paste $K.pub to AWS as a new key pair"
-	@echo " "
-	-ssh-keygen -t ed25519 -f $K 
+	# create a key pair
+	ssh-keygen -t ed25519 -f $K 
