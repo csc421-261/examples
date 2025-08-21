@@ -15,14 +15,20 @@ K= id_ed25519_aws_csc421
 
 all:
 	@echo various targets:
-	@echo "    make connect D=$M"
+	@echo "    make connect M=$M"
 	@echo "    make ssh-keygen"
 
 connect:
+	# update macro M or supply M= when used
 	ssh -i ./$K ubuntu@$M
 
 firefox:
+	# for MacOS`
 	${FF} http://$M
 
 ssh-keygen:
-	ssh-keygen -t ed25519 -f $K 
+	@echo " "
+	@echo "*** no password needed"
+	@echo "*** cut and paste $K.pub to AWS as a new key pair"
+	@echo " "
+	-ssh-keygen -t ed25519 -f $K 
