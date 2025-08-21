@@ -7,7 +7,7 @@
 #     21 aug 2025 -bjr: created
 
 # usage: make connect
-#    or make D=1.2.3.4 connect
+#    or make M=1.2.3.4 connect
 
 M= 3.81.166.181
 FF= /Applications/Firefox.app/Contents/MacOS/firefox 
