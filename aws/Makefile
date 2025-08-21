@@ -2,6 +2,9 @@
 # makefile for csc421-261
 # aws helper file
 #
+# author: bjr
+# last-update:
+#     21 aug 2025 -bjr: created
 
 # usage: make connect
 #    or make D=1.2.3.4 connect
