@@ -1,0 +1,21 @@
+#
+# ~/.ssh/config file for github access
+# author: bjr
+# last-update:
+#     21 aug 2025 -bjr: created
+$
+# add id_ed25519_aws_csc421 to ~/.ssh
+# cut and past id_ed25519_aws_csc421.pub into github, SSH keys
+# make sure the permissions are correct: chmod 0600 id_ed25519_aws_csc421
+#
+
+#
+# test with ssh -T github-csc421
+# clone with git clone github-csc421:burtr/test.git
+#
+
+Host github-csc421
+Hostname github.com
+User git
+IdentityFile ~/.ssh/id_ed25519_aws_csc421
+ 
