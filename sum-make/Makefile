@@ -10,7 +10,7 @@ all:
 	make test
 
 sum: sum.c sum_util.o sum_util.h
-	gcc -o sum sum_util.o sum.c
+	gcc -o sum sum.c sum_util.o
 
 sum_util.o: sum_util.c sum_util.h
 	gcc -o sum_util.o -c sum_util.c 
