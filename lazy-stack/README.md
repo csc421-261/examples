@@ -7,7 +7,8 @@ changed between the open and the close. This explains how a variable seems to be
 
 Because memory is initialized one time, on delivery to the virtual space of the process, the result here (if it works at all) will be consistent.
 
-This sort of may-or-maynot work code, typical of hackers, I call **pirate programming**.
+This sort of may-or-maynot work code, typical of hackers, I call **pirate programming**. As in, why doesn't the count start at 0? I don't know. 
+It's pirate programming. Maybe you can tell me.
 
 ```
 % make run
