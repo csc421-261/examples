@@ -6,9 +6,18 @@ Date: 21 september 2025
 At: csc421 at the Univeristy of Miami
 </pre>
 
-This repository contains a simple **C program** (`nag.c`) that demonstrates 
-how to use **mutexes** and **condition variables** with POSIX threads (`pthread`). 
-It shows how a worker thread can wait either for a **timeout** or for a **signal** from another thread.
+`nag.c` is a simple C program demonstrating how to use POSIX threads, 
+mutexes, and condition variables. 
+
+It creates a "nagging" worker 
+thread that periodically complains if no input is received, 
+but responds differently when the main thread signals 
+it after keyboard input. 
+
+This illustrates how to combine timed 
+waits with event signaling in concurrent programming.
+The main thread can also request the nag thread to exit, 
+for a coordinated stop of the two threads.
 
 ---
 
