@@ -19,11 +19,12 @@ The program creates **two threads**:
 1. **Main thread**
    - Reads characters from the keyboard. `fgets` returns with the message,
    - If the message is not the quit message:
-     - Locks a shared **mutex**.
-     - Copies the message into a shared buffer.
-     - Increments a shared `cur_count`.
-     - Wakes up the `nag` thread via a **condition variable**.
-     - Unlocks the mutex.
+      - Locks a shared **mutex**.
+      - Copies the message into a shared buffer.
+      - Increments a shared `cur_count`.
+      - Wakes up the `nag` thread via a **condition variable**.
+      - Unlocks the mutex.
+      - Loops back up to "Reads characters ... "
     - If the message is the quit message:
       - Locks the shared **mutex**.
       - Sets `req_exit`
@@ -31,7 +32,6 @@ The program creates **two threads**:
       - Unlocks the mutex.
       - Calls `pthread_exit` to wait for the nag thread to exit, then exits.
 
-   - Loops back up to "Reads characters ... "
 
 2. **Nag thread**
    - In a loop:
@@ -44,21 +44,6 @@ The program creates **two threads**:
 
 This pattern demonstrates how to coordinate 
 threads with **time-based waiting** and **event-based signaling**.
-There are two events: 
-   - a new message (`cur_count` is larger than `old_count`)
-   - and to exit (`req_exit` set).
-
----
-
-### Algorithm notes
-
-When the nag thread wakes up (i.e. returns from `pthread_cond_timedwait`), it gets ownership 
-of the mutex and must assess the situation. The use of `old_count` and `new_count` is to 
-indicate the situation that there is new information in the buffer. 
-
-The setting of `req_exit` gives an orderly exit in which the main thread requests the nag thread
-to exit, the nag thread responds to the request by exiting, and the main thread responds to the 
-thread exit by exiting the program.
 
 ---
 
