@@ -58,7 +58,7 @@ void * nag(void * the_args) {
 			pthread_cond_timedwait (t_arg->cond, t_arg->mutex, &ts) ;
 		
 			if ( t_arg->cur_count == t_arg->old_count ) {
-				printf("%s\n", PROMPT_NO ) ;
+				if (!t_arg->req_exit) printf("%s\n", PROMPT_NO ) ;
 			} else {
 				printf(PROMPT_YES, t_arg->buf ) ;
 				t_arg->old_count = t_arg->cur_count ;

@@ -18,26 +18,29 @@ The program creates **two threads**:
 
 1. **Main thread**
    - Reads characters from the keyboard. `fgets` returns with the message,
-   - If the message is a quit message:
-      - Locks the shared **mutex**.
-      - Sets `req_exit`
-      - Wakes up the `nag` thread via a **condition variable**.
-      - Unlocks the mutex.
-      - Calls `pthread_exit` to wait for the nag thread to exit, then exits.
-   - Else:
+   - If the message is not the quit message:
      - Locks a shared **mutex**.
      - Copies the message into a shared buffer.
      - Increments a shared `cur_count`.
      - Wakes up the `nag` thread via a **condition variable**.
      - Unlocks the mutex.
+    - If the message is the quit message:
+      - Locks the shared **mutex**.
+      - Sets `req_exit`
+      - Wakes up the `nag` thread via a **condition variable**.
+      - Unlocks the mutex.
+      - Calls `pthread_exit` to wait for the nag thread to exit, then exits.
+
    - Loops back up to "Reads characters ... "
 
 2. **Nag thread**
-   - Runs the `nag()` function in a loop.
-   - Acquires the **mutex** and then performs a **timed wait** on the condition variable.
-   - If it wakes up because of a **timeout**, it prints a message (e.g., `"Well ... ?"`).
-   - If it wakes up because of a **signal** from the main thread, it prints the shared buffer, and updates `old_count` to `cur_count`.
-   - If `req_exit` is set, exits thread.
+   - In a loop:
+      - Acquires the **mutex** and then performs a **timed wait** on the condition variable.
+      - If `cur_count` is larger than `old_count` then there is a new message to print.
+         - Prints the message and updates `old_count` to equal `cur_count`.
+      - If this was **timeout**, and it prints a nagging message (e.g., `"Well ... ?"`).
+      - Releases the **Mutex**
+      - If `req_exit` is set, exits thread.
 
 This pattern demonstrates how to coordinate 
 threads with **time-based waiting** and **event-based signaling**.
