@@ -72,3 +72,23 @@ threads with **time-based waiting** and **event-based signaling**.
   Lets the `nag` thread periodically wake up and take action even if no input has arrived.
 
 ---
+
+### Sample run
+
+<pre>
+% make run
+./nag
+Speak to me! ("quit" to quit)
+hello
+Is "hello" all you have to say for yourself?
+Well ... ?
+Well ... ?
+nag me some more
+Is "nag me some more" all you have to say for yourself?
+Well ... ?
+ok i am out of here
+Is "ok i am out of here" all you have to say for yourself?
+Well ... ?
+quit
+</pre>
+
