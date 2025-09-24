@@ -8,27 +8,32 @@
 CC= gcc
 CFLAGS= -Wall -pthread
 P= threads_counter
-OPT_FLAGS= -DADD_SLEEP
 
 all:
 	@echo "The read-write should be atomic"
 	make run
 	@echo
 	@echo "The read and write separated by a sleep"
-	make run-with-sleep
+	make run_s
 	make clean
 
 $P: $P.c
 	$(CC) $(CFLAGS) -o $P $P.c
 
-$P-sleep: $P.c
-	${CC} ${CFLAGS} ${OPT_FLAGS} -o $P $P.c
+$P_s: $P_s.c
+	$(CC) $(CFLAGS) -o $@ $<
+
+$P_t: $P_t.c
+	$(CC) $(CFLAGS) -o $@ $<
 
 run: $P
 	./$P
 
-run-with-sleep: $P-sleep
-	./$P
+run_s: $P_s
+	./$P_s
+
+run_t: $P_t
+	./$P_t
 
 clean:
-	rm -f $P
+	rm -f $P $P_s $P_t

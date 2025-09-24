@@ -37,6 +37,9 @@ void * counter_thread(void * arg) {
 	for (int i = 0; i < K; i++) {
 		temp = *(data->count) ;
 		temp += 1 ;
+
+	sleep(1) ;
+
 		*(data->count) = temp ;
 		printf("%sThread %d incremented count to %d%s\n", 
 			data->color, data->index, *data->count, NO_COLOR);
