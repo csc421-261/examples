@@ -45,10 +45,12 @@ The program creates **two threads**:
 2. **Nag thread**
    - In a loop:
       - Acquires the **mutex** and then performs a **timed wait** on the condition variable.
+      - Will return from the wait either from a timeout or because the thread was signaled.
+        - The **mutex** is reacquired by the wake up
       - If `cur_count` is larger than `old_count` then there is a new message to print.
          - Prints the message and updates `old_count` to equal `cur_count`.
       - If this was **timeout**, and it prints a nagging message (e.g., `"Well ... ?"`).
-      - Releases the **Mutex**
+      - Releases the **mutex**
       - If `req_exit` is set, exits thread.
 
 This pattern demonstrates how to coordinate 
