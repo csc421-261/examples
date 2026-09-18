@@ -25,7 +25,7 @@ A common integer `counter` is incremented `K` times by each threads. The increme
 The program is run in three update regimes:
   - **atomic**: (``threads_counter.c``) the read-increment-write statements of each thread are most likely run without other threads intervening. When ``N = K = 5``, the final value of ``count`` is 25.
   - **interleaved**: (``threads_counter_s.c``) a sleep is put between the read and write statements, so the threads very likely interleave their access to the counter. When ``N = K = 5``, the final value of ``count`` is 5.
-  - **interleaved-sequential mixed**: (``threads_counter_t.c``) as the previous but one thread is delayed to run entirely afterwards. When ``N = K = 5``, the final value of ``count`` is 10.
+  - **mixed**: (``threads_counter_t.c``) as the previous but one thread is delayed to run entirely afterwards. When ``N = K = 5``, the final value of ``count`` is 10.
 
 
 The two runs are shown, with colors used so each thread’s output is visually distinct. This makes it easier to see 
