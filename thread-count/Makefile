@@ -15,6 +15,9 @@ all:
 	@echo
 	@echo "The read and write separated by a sleep"
 	make run_s
+	@echo
+	@echo "As above, but one thread delayed"
+	make run_t
 	make clean
 
 $P: $P.c
