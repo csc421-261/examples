@@ -3,7 +3,8 @@
 <pre>
 Author: chatgpt and bjr
 Date: 21 september 2025
-At: csc421 at the Univeristy of Miami
+      18 september 2026
+At: csc421 at the University of Miami
 </pre>
 
 ----
@@ -22,11 +23,14 @@ A common integer `counter` is incremented `K` times by each threads. The increme
 - write to the counter from the temporary
 
 The program is run in two update regimes:
-  - **atomic**: the read-increment-write statements of each thread are most likely run without other threads intervening.
-  - **interleaved**: a sleep is put between the read and write statements, so the threads very likely interleave their access to the counter.
+  - **atomic**: (``threads_counter.c``) the read-increment-write statements of each thread are most likely run without other threads intervening. In the case of 5 threads and 5 increments, the final value is 25.
+  - **interleaved**: (``threads_counter_s.c``) a sleep is put between the read and write statements, so the threads very likely interleave their access to the counter. In the case of 5 threads and 5 increments, the final value is 5.
 
 The two runs are shown, with colors used so each thread’s output is visually distinct. This makes it easier to see 
 the interleaving of thread actions. 
+
+A third variant (``threads_counter_t.c``) is given similar to **interleaved** but one thread is delayed to run afterwards.
+In the case of 5 threads and 5 increments, the final value is 10.
 
 A **race condition** is a situation in concurrency when the result of a calculation can vary depending on the order of events,
 and that ordering is not explicitly controlled. The output is therefore uncertain. I show here two different results, depending
