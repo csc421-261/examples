@@ -22,15 +22,15 @@ A common integer `counter` is incremented `K` times by each threads. The increme
 - increment the temporary
 - write to the counter from the temporary
 
-The program is run in two update regimes:
-  - **atomic**: (``threads_counter.c``) the read-increment-write statements of each thread are most likely run without other threads intervening. In the case of 5 threads and 5 increments, the final value is 25.
-  - **interleaved**: (``threads_counter_s.c``) a sleep is put between the read and write statements, so the threads very likely interleave their access to the counter. In the case of 5 threads and 5 increments, the final value is 5.
+The program is run in three update regimes:
+  - **atomic**: (``threads_counter.c``) the read-increment-write statements of each thread are most likely run without other threads intervening. When ``N = K = 5``, the final value of ``count`` is 25.
+  - **interleaved**: (``threads_counter_s.c``) a sleep is put between the read and write statements, so the threads very likely interleave their access to the counter. When ``N = K = 5``, the final value of ``count`` is 5.
+  - **interleaved-sequential mixed**: (``threads_counter_t.c``) as the previous but one thread is delayed to run entirely afterwards. When ``N = K = 5``, the final value of ``count`` is 10.
+
 
 The two runs are shown, with colors used so each thread’s output is visually distinct. This makes it easier to see 
 the interleaving of thread actions. 
 
-A third variant (``threads_counter_t.c``) is given similar to **interleaved** but one thread is delayed to run afterwards.
-In the case of 5 threads and 5 increments, the final value is 10.
 
 A **race condition** is a situation in concurrency when the result of a calculation can vary depending on the order of events,
 and that ordering is not explicitly controlled. The output is therefore uncertain. I show here two different results, depending
