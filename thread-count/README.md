@@ -28,7 +28,7 @@ The program is run in three update regimes:
   - **mixed**: (``threads_counter_t.c``) as the previous but one thread is delayed to run entirely afterwards. When ``N = K = 5``, the final value of ``count`` is 10.
 
 
-The two runs are shown, with colors used so each thread’s output is visually distinct. This makes it easier to see 
+The runs are shown, with colors used so each thread’s output is visually distinct. This makes it easier to see 
 the interleaving of thread actions. 
 
 
